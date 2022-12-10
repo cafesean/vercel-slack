@@ -17,7 +17,7 @@ Content-Type: application/json
 }
 
 ### 
-GET http://localhost:3000/api/gpt/asfadsfasdf?max_tokens=100&temp=0.5
+GET http://localhost:3000/api/slack/
 
 
 
@@ -28,7 +28,7 @@ GET https://nextjs-api-routes-m7veurbhu-jetdevs.vercel.app/api/user/as
 
 ### 
 
-POST http://localhost:3000/api/gpt/text-davinci-003?max_tokens=100&temp=0.7
+POST http://localhost:3000/gpt/text-davinci-003?max_tokens=100&temp=0.7
 Content-Type: application/json
 
 {
@@ -39,9 +39,10 @@ Content-Type: application/json
 
 ### 
 
-POST https://nextjs-api-routes-jetdevs.vercel.app/api/gpt/text-davinci-003?max_tokens=100&temp=0.7
+POST https://vercel.jetdevs.io/api/gpt/code-davinci-001?max_tokens=1000&temp=0.7
 Content-Type: application/json
 
 {
-    "prompt": "What is the singularity?"
+    "prompt": "Write a c++ function that takes in a string and returns the string reversed."
 }
+

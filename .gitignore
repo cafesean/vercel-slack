@@ -18,6 +18,8 @@
 # misc
 .DS_Store
 *.pem
+.env
+test.http
 
 # debug & testing
 test.http
