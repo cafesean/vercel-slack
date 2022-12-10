@@ -4,7 +4,7 @@ import { validateSlackRequest } from './_validate'
 import { signingSecret } from './_constants'
 
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { message } from './events_handlers/message'
+import { message } from './events_handlers/_message'
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
