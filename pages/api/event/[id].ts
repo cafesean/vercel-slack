@@ -8,14 +8,14 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 
 export default async function slackHandler(req: NextApiRequest, res: NextApiResponse) {
-//   const {
-//     // set query params to number type
-//     query: { id, max_tokens, temp },
-//     body: { prompt },
-//     method,
-//   } = req
+    const {
+        // set query params to number type
+        // query: { id, max_tokens, temp },
+        body: { type },
+        method,
+    } = req
 
-    var type = req.body.type
+    // var type = req.body.type
 
     if (type === "url_verification") {
         await challenge(req, res)
