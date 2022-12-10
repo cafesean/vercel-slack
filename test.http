@@ -90,7 +90,9 @@ message.im (direct)
 
 ### 
 
-POST https://vercel-slack-jetdevs.vercel.app/api/slack/event
+GET https://vercel-slack-jetdevs.vercel.app/api/slack/ver
+
+
 Content-Type: application/json
 
 {
