@@ -2,7 +2,7 @@ GET https://slackgpt.vercel.ai.jetdevs.io/prod/gpt
 
 ###
 
-GET http://localhost:3000/api/hello
+GET http://localhost:3000/api/gpt
 
 
 ### 
@@ -17,7 +17,15 @@ Content-Type: application/json
 }
 
 ### 
-GET http://localhost:3000/api/slack/
+POST http://localhost:3000/api/event
+Content-Type: application/json
+
+{
+    "token": "Jhj5dZrVaK7ZwHHjRyZWjbDl",
+    "challenge": "3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P",
+    "type": "url_verification"
+}
+
 
 
 
@@ -28,7 +36,7 @@ GET https://nextjs-api-routes-m7veurbhu-jetdevs.vercel.app/api/user/as
 
 ### 
 
-POST http://localhost:3000/gpt/text-davinci-003?max_tokens=100&temp=0.7
+POST http://localhost:3000/api/gpt/text-davinci-003?max_tokens=100&temp=0.7
 Content-Type: application/json
 
 {
