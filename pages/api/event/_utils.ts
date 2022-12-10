@@ -41,29 +41,29 @@ export async function postToChannel(channelId:string, thread:any, res:any, paylo
 
 }
 
-async function channelNameToId(channelName) {
-    var generalId
-    var id
-    await axios({
-        method: 'post',
-        url: 'https://slack.com/api/conversations.list',
-        headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': `Bearer ${token}` },
-    })
-        .then(response => {
-            response.data.channels.forEach(element => {
+// async function channelNameToId(channelName) {
+//     var generalId
+//     var id
+//     await axios({
+//         method: 'post',
+//         url: 'https://slack.com/api/conversations.list',
+//         headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': `Bearer ${token}` },
+//     })
+//         .then(response => {
+//             response.data.channels.forEach(element => {
 
-                if (element.name === channelName) {
-                    id = element.id
-                    return element.id
-                }
-                else if(element.name === "general") generalId = element.id
-            });
+//                 if (element.name === channelName) {
+//                     id = element.id
+//                     return element.id
+//                 }
+//                 else if(element.name === "general") generalId = element.id
+//             });
 
-            return generalId
-        })
-        .catch(err => {
-            console.log("axios Error:", err)
-        })
+//             return generalId
+//         })
+//         .catch(err => {
+//             console.log("axios Error:", err)
+//         })
 
-        return id
-}
+//         return id
+// }
