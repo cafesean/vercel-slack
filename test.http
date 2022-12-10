@@ -2,7 +2,7 @@ GET https://slackgpt.vercel.ai.jetdevs.io/prod/gpt
 
 ###
 
-GET http://localhost:3000/api/gpt
+GET http://localhost:3000/api/ver
 
 
 ### 
@@ -90,8 +90,10 @@ message.im (direct)
 
 ### 
 
-GET https://vercel-slack-jetdevs.vercel.app/api/slack/ver
+GET https://vercel-slack-jetdevs.vercel.app/api/ver
 
+
+###
 
 Content-Type: application/json
 
