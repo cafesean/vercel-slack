@@ -7,17 +7,32 @@ GET http://localhost:3000/api/hello
 
 ### 
 
-
-
-GET http://nextjs-api-routes-bql2pzlbu-jetdevs.vercel.app/api
-
-### 
-
-POST http://localhost:3000/api/gpt/text-davinci-003
+POST http://localhost:3000/api/user/4?b=asdfasdddfasdfadf
 Content-Type: application/json
 
 {
     "prompt": "who was governor of illinois 1999? only answer with the name of the player.",
+    "temperature": 0.7,
+    "max_tokens": 100
+}
+
+### 
+GET http://localhost:3000/api/gpt/asfadsfasdf?max_tokens=100&temp=0.5
+
+
+
+### 
+
+GET https://nextjs-api-routes-m7veurbhu-jetdevs.vercel.app/api/user/as
+
+
+### 
+
+POST http://localhost:3000/api/gpt/text-davinci-003?max_tokens=100&temp=0.7
+Content-Type: application/json
+
+{
+    "prompt": "What's the oldest building in the world. Just tell me the name of the building.",
     "temperature": 0.7,
     "max_tokens": 100
 }
