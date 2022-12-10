@@ -1,6 +1,5 @@
 import { sendChallenge } from './events_handlers/challenge'
-import { app_mention } from './events_handlers/_app_mention'
-import { channel_created } from './events_handlers/_channel_created'
+// import { app_mention } from './events_handlers/_app_mention'
 import { validateSlackRequest } from './_validate'
 import { signingSecret } from './_constants'
 
@@ -28,9 +27,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             var event_type = req.body.event.type
 
             switch (event_type) {
-                case "app_mention": await app_mention(req, res); break;
-                case "channel_created": await channel_created(req, res); break;
-                case  "message": await message(req ,res); break;
+                // case "app_mention": await app_mention(req, res); break;
+                // case "channel_created": await channel_created(req, res); break;
+                case "message": await message(req ,res); break;
             
                 default: break;
             }
