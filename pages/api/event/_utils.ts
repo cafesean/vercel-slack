@@ -9,7 +9,7 @@ export function tokenizeString(string) {
     return array
 }
 
-export async function postToChannel(channelId, res, payload) {
+export async function postToChannel(channelId:string, thread:any, res:any, payload:any) {
 
     console.log("channel:", channelId)
     // var channelId = await channelNameToId(channel)
@@ -17,7 +17,7 @@ export async function postToChannel(channelId, res, payload) {
     // console.log("ID:", channelId)
 
     const message = {
-        channel: channelId,
+        channel: channelId, thread,
         text: payload,
     }
 
