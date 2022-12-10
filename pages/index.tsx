@@ -7,18 +7,8 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json())
 export default function Index() {
   const { data, error } = useSwr<User[]>('/api/users', fetcher)
 
-  if (error) return <div>Failed to load users</div>
-  if (!data) return <div>Loading...</div>
+  if (error) return "Failed to load users"
+  if (!data) return "Loading..."
 
-  return (
-    <ul>
-      {data.map((user) => (
-        <li key={user.id}>
-          <Link href="/user/[id]" as={`/user/${user.id}`} legacyBehavior>
-            {`User ${user.id}`}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  )
+  return data
 }

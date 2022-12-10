@@ -1,0 +1,23 @@
+GET https://slackgpt.vercel.ai.jetdevs.io/prod/gpt
+
+###
+
+GET http://localhost:3000/api/hello
+
+
+### 
+
+
+
+GET http://nextjs-api-routes-bql2pzlbu-jetdevs.vercel.app/api
+
+### 
+
+POST http://localhost:3000/api/gpt/text-davinci-003
+Content-Type: application/json
+
+{
+    "prompt": "who was governor of illinois 1999? only answer with the name of the player.",
+    "temperature": 0.7,
+    "max_tokens": 100
+}

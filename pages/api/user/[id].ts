@@ -9,11 +9,11 @@ export default function userHandler(req: NextApiRequest, res: NextApiResponse) {
   switch (method) {
     case 'GET':
       // Get data from your database
-      res.status(200).json({ id, name: `User ${id}` })
+      res.status(200).json({ id, name: `${id}` })
       break
     case 'PUT':
       // Update or create data in your database
-      res.status(200).json({ id, name: name || `User ${id}` })
+      res.status(200).json({ id, name: name || `${id}` })
       break
     default:
       res.setHeader('Allow', ['GET', 'PUT'])
