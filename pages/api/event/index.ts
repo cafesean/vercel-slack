@@ -26,6 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         // if (type === "event_callback") {
         var event_type = req.body.event.type
 
+
         switch (event_type) {
             // case "app_mention": await app_mention(req, res); break;
             // case "channel_created": await channel_created(req, res); break;
