@@ -31,7 +31,15 @@ Content-Type: application/json
 
 ### 
 
-GET https://nextjs-api-routes-m7veurbhu-jetdevs.vercel.app/api/user/as
+POST https://vercel-slack-1gjqg2qvl-jetdevs.vercel.app/api/slack/event
+Content-Type: application/json
+
+{
+    "token": "Jhj5dZrVaK7ZwHHjRyZWjbDl",
+    "challenge": "3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P",
+    "type": "url_verification"
+}
+
 
 
 ### 
@@ -54,3 +62,9 @@ Content-Type: application/json
     "prompt": "Write a c++ function that takes in a string and returns the string reversed."
 }
 
+###
+
+POST https://hooks.slack.com/services/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
+Content-type: application/json
+
+{"text":"Hello, World!"}
