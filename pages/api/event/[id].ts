@@ -1,4 +1,4 @@
-import { challenge } from './events_handlers/challenge'
+import { sendChallenge } from './events_handlers/challenge'
 import { app_mention } from './events_handlers/_app_mention'
 import { channel_created } from './events_handlers/_channel_created'
 import { validateSlackRequest } from './_validate'
@@ -18,7 +18,7 @@ export default async function slackHandler(req: NextApiRequest, res: NextApiResp
     // var type = req.body.type
 
     if (type === "url_verification") {
-        await challenge(req, res)
+        await sendChallenge(req, res)
     }
 
     else if (validateSlackRequest(req, token)) {
