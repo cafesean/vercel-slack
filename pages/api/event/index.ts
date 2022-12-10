@@ -23,20 +23,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     else if (validateSlackRequest(req, signingSecret)) {
 
-        if (type === "event_callback") {
-            var event_type = req.body.event.type
+        // if (type === "event_callback") {
+        var event_type = req.body.event.type
 
-            switch (event_type) {
-                // case "app_mention": await app_mention(req, res); break;
-                // case "channel_created": await channel_created(req, res); break;
-                case "message": await message(req ,res); break;
-            
-                default: break;
-            }
+        switch (event_type) {
+            // case "app_mention": await app_mention(req, res); break;
+            // case "channel_created": await channel_created(req, res); break;
+            case "message": await message(req ,res); break;
+        
+            default: break;
+        }
 
-        }
-        else {
-            console.log("body:", req.body)
-        }
     }
+        // else {
+        //     console.log("body:", req.body)
+        // }
 }
