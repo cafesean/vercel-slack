@@ -8,9 +8,16 @@ export async function message(req, res) {
     let text = `Hi there! <@${event.item.user}>!`; 
     
     try {
-        await postToChannel(channel, thread, res, text);
+        await postToChannel(channel, thread, res, "Sending to event.channel "+channel + " event.ts "+thread);
     }
     catch (e) {
-        console.log(e)
+        console.log(e);
+    }
+
+    try {
+        await postToChannel(event.item.channel, event.item.ts, res, "Sending to event.item.channel "+event.item.channel + " event.item.ts "+event.item.ts);
+    }
+    catch (e) {
+        console.log(e);
     }
 }
