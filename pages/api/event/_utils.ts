@@ -17,7 +17,7 @@ export async function postToChannel(channelId:string, thread:any, res:any, paylo
     // console.log("ID:", channelId)
 
     const message = {
-        channel: channelId, thread,
+        channel: thread,
         text: payload,
     }
 
