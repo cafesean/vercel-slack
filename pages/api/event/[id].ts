@@ -1,4 +1,4 @@
-import { challenge } from './events_handlers/_challenge'
+import { challenge } from './events_handlers/challenge'
 import { app_mention } from './events_handlers/_app_mention'
 import { channel_created } from './events_handlers/_channel_created'
 import { validateSlackRequest } from './_validate'
@@ -7,7 +7,7 @@ import { signingSecret } from './_constants'
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 
-export default async function gptHandler(req: NextApiRequest, res: NextApiResponse) {
+export default async function slackHandler(req: NextApiRequest, res: NextApiResponse) {
 //   const {
 //     // set query params to number type
 //     query: { id, max_tokens, temp },

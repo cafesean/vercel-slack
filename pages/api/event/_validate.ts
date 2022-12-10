@@ -1,9 +1,9 @@
 
 // This code snippet is based on https://github.com/antonputra/tutorials/tree/main/lessons/076
+import crypto from "crypto";
+// const crypto = require("crypto");
 
-const crypto = require("crypto");
-
-exports.validateSlackRequest = (event, signingSecret) => {
+export function validateSlackRequest (event, signingSecret) {
 
     const requestBody = JSON.stringify(event["body"])
 
