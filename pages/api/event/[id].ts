@@ -11,7 +11,7 @@ export default async function slackHandler(req: NextApiRequest, res: NextApiResp
     const {
         // set query params to number type
         // query: { id, max_tokens, temp },
-        body: { type },
+        body: { token, challenge, type },
         method,
     } = req
 
@@ -21,7 +21,7 @@ export default async function slackHandler(req: NextApiRequest, res: NextApiResp
         await challenge(req, res)
     }
 
-    else if (validateSlackRequest(req, signingSecret)) {
+    else if (validateSlackRequest(req, token)) {
 
         if (type === "event_callback") {
             var event_type = req.body.event.type
