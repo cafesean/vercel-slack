@@ -5,6 +5,7 @@ import { signingSecret } from './_constants'
 import type { NextApiRequest, NextApiResponse } from 'next';
 // import { message } from './events_handlers/_message'
 import { postToChannel } from "./_utils"
+import { gpt3 } from "../gpt/[id]"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const {
@@ -23,21 +24,27 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     else if (validateSlackRequest(req, signingSecret)) {
 
         // if (type === "event_callback") {
-        var event_type = req.body.event.type
+        if (event_type === "message") { //must be direct
+            var event_type = req.body.event.type
 
 
-        // let event = req.body.event;
-        let channel = req.body.event.channel;
-        let thread = req.body.event.ts;
-        // let text = `In message! <@${event.user}>!`; 
-        
-        try {
-            await postToChannel(channel, thread, res, "In Message. Sending to event.channel "+channel + " event.ts "+thread);
+            // let event = req.body.event;
+            let channel = req.body.event.channel;
+            let thread = req.body.event.ts;
+            let prompt = req.body.event.text;
+            // let text = `In message! <@${event.user}>!`; 
+            
+
+
+            try {
+                let completion = await gpt3(prompt);
+            
+                await postToChannel(channel, thread, res, completion);
+            }
+            catch (e) {
+                console.log(e);
+            }
         }
-        catch (e) {
-            console.log(e);
-        }
-
 
 
 

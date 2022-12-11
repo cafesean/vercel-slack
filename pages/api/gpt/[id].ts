@@ -1,32 +1,20 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-
 import axios from 'axios';
 // import { FastifyInstance } from 'fastify';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-export default async function gptHandler(req: NextApiRequest, res: NextApiResponse) {
-  const {
-    // set query params to number type
-    query: { id, max_tokens, temp },
-    body: { prompt },
-    method,
-  } = req
+export async function gpt3(prompt) {
 
-  switch (method) {
-    case 'GET':
-      // Get data from your database
-      res.status(200).json({ id: `${id}`, max_tokens: `${max_tokens}`, temperature: `${temp}` })
-      break
-    
-    
-    case 'POST':
         var resultJSON = {};
         
-        const engine = id;
-        const paramTemp = new Number(temp);
-        const paramToken = new Number(max_tokens);
+        // const engine = id;
+        // const paramTemp = new Number(temp);
+        // const paramToken = new Number(max_tokens);
+
+        const engine = "text-davinci-003";
+        const paramTemp = 0.7;
+        const paramToken = 300;
 
         var temperature = new Number(process.env.TEMPERATURE);
         var tokens = new Number(process.env.MAX_TOKENS);
@@ -58,18 +46,10 @@ export default async function gptHandler(req: NextApiRequest, res: NextApiRespon
           .then(response => {
             resultJSON["completion"] = response.data.choices[0].text 
 
-            res.status(200).json( resultJSON );
+            return( resultJSON );
           })
           .catch(error => {
-            res.status(400).json(error);
+            return(error);
         });
         // return JSON.stringify(resultJSON);
-
-      // Update or create data in your database
-      break;
-
-    default:
-      res.setHeader('Allow', ['GET', 'POST'])
-      res.status(405).end(`Method ${method} Not Allowed`)
-  }
 }
