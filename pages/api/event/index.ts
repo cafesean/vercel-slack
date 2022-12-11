@@ -40,9 +40,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             try {
                 await postToChannel(channel, thread, res, "Asking GPT-3 for completion of: "+prompt);
                 
-                let completion = await gpt3(prompt);
+                // let completion = await gpt3(prompt);
 
-                await postToChannel(channel, thread, res, completion);
+                // await postToChannel(channel, thread, res, completion);
             }
             catch (e) {
                 console.log(e);
