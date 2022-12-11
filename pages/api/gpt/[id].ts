@@ -4,8 +4,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-export async function gpt3(prompt) {
-
+export default async function gpt3(prompt) {
+console.log("in gpt3");
         // var resultJSON = {};
         
         // const engine = id;
@@ -39,14 +39,18 @@ export async function gpt3(prompt) {
             "Authorization": "Bearer " + process.env.OPENAI_API_KEY,
           }
         };
-
-        // var completion = "";
+        // console.log("apiUrl = ", apiUrl);
+        // console.log("tokens = ", tokens);
+        // console.log("prompt = ", prompt);
+        // console.log("temperature = ", temperature);
+        // console.log("options = ", options);
+        var completion = "";
         await axios
           .post(apiUrl, data, options)
           .then(response => {
             // resultJSON["completion"] = response.data.choices[0].text 
-
-            return( response.data.choices[0].text );
+            completion = response.data.choices[0].text 
+            return( completion );
           })
           .catch(error => {
             return(error);

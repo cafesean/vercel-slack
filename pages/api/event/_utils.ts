@@ -9,6 +9,31 @@ export function tokenizeString(string) {
     return array
 }
 
+export async function acknowledge(req, res) {
+
+    const message = {
+        text: "...",
+        response_type: "ephemeral",
+        user: req.body.event.user,
+        channel: req.body.event.channel,
+        thread_ts: req.body.event.ts
+    }
+
+    await axios({
+        method: 'post',
+        url: 'https://slack.com/api/chat.postEphemeral',
+        headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': `Bearer ${token}` },
+        data: message,
+    })
+        .then(response => {
+            console.log("Acknowledge: ", response.data);
+        })
+        .catch(err => {
+            console.log("axios Error:", err)
+        })
+
+}
+
 export async function postToChannel(channelId, thread, res, payload) {
 
     console.log("channel:", channelId)
@@ -22,19 +47,19 @@ export async function postToChannel(channelId, thread, res, payload) {
         text: payload,
     }
 
-    axios({
+    await axios({
         method: 'post',
         url: 'https://slack.com/api/chat.postMessage',
         headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': `Bearer ${token}` },
         data: message,
     })
         .then(response => {
-            console.log("data from axios:", response.data)
-            res.json({ ok: true })
+            // response.data;
+            return response.data;
         })
         .catch(err => {
             console.log("axios Error:", err)
-            res.send({
+            return res.status(500).send({
                 "response_type": "ephemeral",
                 "text": `${err.response.data.error}`
             })

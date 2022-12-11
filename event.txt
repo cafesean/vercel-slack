@@ -1,0 +1,105 @@
+Request body - sent by user:
+{
+    token: 'qrRreX5x8f4mCLUNkwgmyKHe',
+    team_id: 'T01QP5K3092',
+    api_app_id: 'A04E76UV1J8',
+    event: {
+      client_msg_id: '02077050-9147-401b-8e25-070bd6645b25',
+      type: 'message',
+      text: 'How tall is the eiffel tower?',
+      user: 'U01Q27B9JHM',
+      ts: '1670747610.747369',
+      blocks: [ [Object] ],
+      team: 'T01QP5K3092',
+      thread_ts: '1670724150.409939',
+      parent_user_id: 'U01Q27B9JHM',
+      channel: 'D04EMVBLXAN',
+      event_ts: '1670747610.747369',
+      channel_type: 'im'
+    },
+    type: 'event_callback',
+    event_id: 'Ev04EP4D7SF5',
+    event_time: 1670747610,
+    authorizations: [
+      {
+        enterprise_id: null,
+        team_id: 'T01QP5K3092',
+        user_id: 'U04EMPKPM35',
+        is_bot: true,
+        is_enterprise_install: false
+      }
+    ],
+    is_ext_shared_channel: false,
+    event_context: '4-eyJldCI6Im1lc3NhZ2UiLCJ0aWQiOiJUMDFRUDVLMzA5MiIsImFpZCI6IkEwNEU3NlVWMUo4IiwiY2lkIjoiRDA0RU1WQkxYQU4ifQ'
+  }
+
+Request body from Slack - bot message:
+
+ {
+  ok: true,
+  channel: 'D04EMVBLXAN',
+  ts: '1670747614.565559',
+  message: {
+    bot_id: 'B04EF98L2F8',
+    type: 'message',
+    text: '\n\nThe Eiffel Tower is 324 metres (1,063 feet) tall.',
+    user: 'U04EMPKPM35',
+    ts: '1670747614.565559',
+    app_id: 'A04E76UV1J8',
+    team: 'T01QP5K3092',
+    bot_profile: {
+      id: 'B04EF98L2F8',
+      app_id: 'A04E76UV1J8',
+      name: 'GPT',
+      icons: [Object],
+      deleted: false,
+      updated: 1670669625,
+      team_id: 'T01QP5K3092'
+    },
+    thread_ts: '1670724150.409939',
+    parent_user_id: 'U01Q27B9JHM'
+  }
+}  
+
+{
+  token: 'qrRreX5x8f4mCLUNkwgmyKHe',
+  team_id: 'T01QP5K3092',
+  api_app_id: 'A04E76UV1J8',
+  event: {
+    bot_id: 'B04EF98L2F8',
+    type: 'message',
+    text: '\n\nMount Everest is 8,848 metres (29,029 ft) tall.',
+    user: 'U04EMPKPM35',
+    ts: '1670747929.153719',
+    app_id: 'A04E76UV1J8',
+    team: 'T01QP5K3092',
+    bot_profile: {
+      id: 'B04EF98L2F8',
+      deleted: false,
+      name: 'GPT',
+      updated: 1670669625,
+      app_id: 'A04E76UV1J8',
+      icons: [Object],
+      team_id: 'T01QP5K3092'
+    },
+    thread_ts: '1670724150.409939',
+    parent_user_id: 'U01Q27B9JHM',
+    channel: 'D04EMVBLXAN',
+    event_ts: '1670747929.153719',
+    channel_type: 'im'
+  },
+  type: 'event_callback',
+  event_id: 'Ev04FCUFCU80',
+  event_time: 1670747929,
+  authorizations: [
+    {
+      enterprise_id: null,
+      team_id: 'T01QP5K3092',
+      user_id: 'U04EMPKPM35',
+      is_bot: true,
+      is_enterprise_install: false
+    }
+  ],
+  is_ext_shared_channel: false,
+  event_context: '4-eyJldCI6Im1lc3NhZ2UiLCJ0aWQiOiJUMDFRUDVLMzA5MiIsImFpZCI6IkEwNEU3NlVWMUo4IiwiY2lkIjoiRDA0RU1WQkxYQU4ifQ'
+}
