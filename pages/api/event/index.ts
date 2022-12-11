@@ -30,6 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             // let event = req.body.event;
             let channel = req.body.event.channel;
             let thread = req.body.event.ts;
+            let prompt = req.body.event.text;
             // let text = `In message! <@${event.user}>!`; 
             
             try {
