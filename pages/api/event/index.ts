@@ -34,7 +34,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             // let text = `In message! <@${event.user}>!`; 
             
             try {
-                await postToChannel(channel, thread, res, "In Message. Sending to event.channel "+channel + " event.ts "+thread);
+                await postToChannel(channel, thread, res, "Now In Message. Sending to event.channel "+channel + " event.ts "+thread);
             }
             catch (e) {
                 console.log(e);
