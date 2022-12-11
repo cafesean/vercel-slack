@@ -5,8 +5,6 @@ import { signingSecret } from './_constants'
 import type { NextApiRequest, NextApiResponse } from 'next';
 // import { message } from './events_handlers/_message'
 import { postToChannel } from "./_utils"
-import { gpt3 } from "../gpt/[id]"
-import { equal } from 'assert';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const {
@@ -32,23 +30,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             // let event = req.body.event;
             let channel = req.body.event.channel;
             let thread = req.body.event.ts;
-            let prompt = req.body.event.text;
             // let text = `In message! <@${event.user}>!`; 
             
-
-
             try {
-                await postToChannel(channel, thread, res, "Asking GPT-3 for completion of: "+prompt);
-                
-                // let completion = await gpt3(prompt);
-
-                // await postToChannel(channel, thread, res, completion);
+                await postToChannel(channel, thread, res, "In Message. Sending to event.channel "+channel + " event.ts "+thread);
             }
             catch (e) {
                 console.log(e);
             }
         }
-        res.end;
 
 
 
