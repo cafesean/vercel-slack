@@ -6,7 +6,7 @@ dotenv.config();
 
 export async function gpt3(prompt) {
 
-        var resultJSON = {};
+        // var resultJSON = {};
         
         // const engine = id;
         // const paramTemp = new Number(temp);
@@ -44,9 +44,9 @@ export async function gpt3(prompt) {
         await axios
           .post(apiUrl, data, options)
           .then(response => {
-            resultJSON["completion"] = response.data.choices[0].text 
+            // resultJSON["completion"] = response.data.choices[0].text 
 
-            return( resultJSON );
+            return( response.data.choices[0].text );
           })
           .catch(error => {
             return(error);
