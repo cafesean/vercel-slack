@@ -7,6 +7,10 @@ GET http://localhost:3000/api/ver
 
 ### 
 
+GET https://vercel-slack-gpt.vercel.app/api/ver
+
+###
+
 POST http://localhost:3000/api/user/4?b=asdfasdddfasdfadf
 Content-Type: application/json
 
