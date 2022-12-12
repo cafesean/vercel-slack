@@ -31,12 +31,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     } = req;
     res.json({ok:true}); 
     
-    console.log("app.event('message', async ({ event, say }) => {");
-    console.log("event:", event);
-    console.log("event.type:", event.type);
-    console.log("event.channel:", event.channel);
-    console.log("event.ts:", event.ts);
-
     let channel = app.channel;
     let thread = app.thread_ts;
     let prompt =  req.body.event.text;
