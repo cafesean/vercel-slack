@@ -37,29 +37,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log("event.channel:", event.channel);
     console.log("event.ts:", event.ts);
 
-app.event('message', async ({ event, say }) => {
-
-
-    if (event.text.indexOf("’") != -1) {
-        const result = await app.client.chat.postEphemeral({
-            token: process.env.SLACK_BOT_TOKEN,
-            channel: event.channel,
-            text: "Please use a standard apostrophe (') instead of a curly apostrophe (’).",
-            thread_ts: event.ts
-        });
-        console.log("result:", result)
-    }
-});
-
-
-
     let channel = app.channel;
     let thread = app.thread_ts;
     let prompt =  req.body.event.text;
 
-console.log("app.bot_id=null:", app.bot_id==null);
-console.log("app.event_type:", app.event_type);
-console.log("app.event:", JSON.stringify(app.event));
+// console.log("app.bot_id=null:", app.bot_id==null);
+// console.log("app.event_type:", app.event_type);
+// console.log("app.event:", JSON.stringify(app.event));
     // var type = req.body.type
     if (type === "url_verification") {
         await sendChallenge(req, res)
@@ -135,6 +119,6 @@ console.log("NOT A BOT");
     } catch {
         // res.status(500).send("error");
     }  
-    res.end;
+    // res.end;
 }
 
