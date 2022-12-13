@@ -68,7 +68,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     
 console.log("NOT A BOT");
     
-    var event_type = app.event_type;
+    // var event_type = app.event_type;
 
 
     const engine = "text-davinci-003";
@@ -78,6 +78,7 @@ console.log("NOT A BOT");
 
     const apiUrl = 'https://api.openai.com/v1/engines/' + engine + '/completions';
 
+console.log("apiUrl: ", apiUrl);
     const data = {
         prompt: prompt,
         max_tokens: tokens,
@@ -92,7 +93,12 @@ console.log("NOT A BOT");
 
     var completion = "";
 
+console.log("before axios");
     try {
+console.log("in try");
+console.log("apiUrl:", apiUrl);
+console.log("data:", data);
+console.log("options:", options);
         await axios
             .post(apiUrl, data, options)
             .then(response => {
