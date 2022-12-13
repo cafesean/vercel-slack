@@ -53,7 +53,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             thread_ts: event.ts,
             text: "Single quotes (\') are not allowed."
         });
-        
+        console.log("Single quotes (\') are not allowed.");
         // res.status(200).end();
         return res.status(200).end();
     } 
@@ -99,9 +99,9 @@ console.log("NOT A BOT");
             // resultJSON["completion"] = response.data.choices[0].text 
 
                 completion = response.data.choices[0].text;
-// console.log("completion:", completion);
-// console.log("event.channel:", event.channel);
-// console.log("event.ts:", event.ts);
+console.log("completion:", completion);
+console.log("event.channel:", event.channel);
+console.log("event.ts:", event.ts);
                 const result = app.client.chat.postMessage({
                     channel: event.channel,
                     thread_ts: event.ts,
