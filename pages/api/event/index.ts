@@ -47,7 +47,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return;
     }
 
-    if (req.body.event.text.indexOf("’") != -1) {
+    if (prompt.indexOf("’") != -1) {
             const result = await app.client.chat.postMessage({
             channel: event.channel,
             thread_ts: event.ts,
