@@ -73,8 +73,8 @@ console.log("NOT A BOT");
 
     const engine = "text-davinci-003";
 
-    var temperature = process.env.TEMPERATURE;
-    var tokens = process.env.MAX_TOKENS;
+    var temperature = new Number(process.env.TEMPERATURE);
+    var tokens = new Number(process.env.MAX_TOKENS);
 
     const apiUrl = 'https://api.openai.com/v1/engines/' + engine + '/completions';
 
@@ -108,14 +108,7 @@ console.log("options:", options);
 console.log("completion:", completion);
 console.log("event.channel:", event.channel);
 console.log("event.ts:", event.ts);
-                const result = app.client.chat.postMessage({
-                    channel: event.channel,
-                    thread_ts: event.ts,
-                    text: completion
-                });
-                console.log("done posting to channel");
-    // console.log("result:", result);
-                res.status(200).end({ok: true});
+
                 console.log("data: ", response.data);
             })
             .catch(error => {
@@ -123,12 +116,20 @@ console.log("event.ts:", event.ts);
                 res.status(200).end({ok: false});
         });
 
-
+        const result = app.client.chat.postMessage({
+            channel: event.channel,
+            thread_ts: event.ts,
+            text: completion
+        });
+        console.log("done posting to channel");
+        // console.log("result:", result);
+        res.status(200).end({ok: true});
         // postToChannel(channel, thread, res, completion);
         // res.status(200).send("ok");
     } catch(e) {
         console.log("catch=",e);
     }  
+    console.log("Completion: ", completion);
     res.status(200).end({ok: true});
 }
 
