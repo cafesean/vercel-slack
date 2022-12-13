@@ -116,7 +116,7 @@ console.log("event.ts:", event.ts);
                 res.status(200).end({ok: false});
         });
 
-        const result = app.client.chat.postMessage({
+        const result = await app.client.chat.postMessage({
             channel: event.channel,
             thread_ts: event.ts,
             text: completion
