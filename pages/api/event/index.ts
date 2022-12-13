@@ -29,7 +29,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         body: { token, challenge, type, event },
         method,
     } = req;
-    res.json({ok:true}); 
     
     let channel = app.channel;
     let thread = app.thread_ts;
@@ -56,17 +55,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         });
         
         // res.status(200).end();
-        return;
+        return res.status(200).end();
     } 
 
     if (!validateSlackRequest(req, signingSecret)) {
         console.log("Request invalid");
         // res.status(500).end();
-        return;
+        return res.status(200).end();
     }
-
+    res.status(200).send({ok: true});
+    // res.json({ok:true}); 
+    
 console.log("NOT A BOT");
-
+    
     var event_type = app.event_type;
 
 
@@ -85,7 +86,7 @@ console.log("NOT A BOT");
     const options = {
         headers: {
         "Content-Type": `application/json`,
-        "Authorization": "Bearer " + process.env.OPENAI_API_KEY,
+        "Authorization": `Bearer ` + process.env.OPENAI_API_KEY,
         }
     };
 
@@ -98,21 +99,30 @@ console.log("NOT A BOT");
             // resultJSON["completion"] = response.data.choices[0].text 
 
                 completion = response.data.choices[0].text;
+// console.log("completion:", completion);
+// console.log("event.channel:", event.channel);
+// console.log("event.ts:", event.ts);
+                const result = app.client.chat.postMessage({
+                    channel: event.channel,
+                    thread_ts: event.ts,
+                    text: completion
+                });
+                console.log("done posting to channel");
+    // console.log("result:", result);
+                res.status(200).end({ok: true});
+                console.log("data: ", response.data);
             })
             .catch(error => {
-            return(error);
+                console.log("in catch error");
+                res.status(200).end({ok: false});
         });
-        const result = await app.client.chat.postMessage({
-            channel: event.channel,
-            thread_ts: event.ts,
-            text: completion
-        });
+
 
         // postToChannel(channel, thread, res, completion);
         // res.status(200).send("ok");
-    } catch {
-        // res.status(500).send("error");
+    } catch(e) {
+        console.log("catch=",e);
     }  
-    // res.end;
+    res.status(200).end({ok: true});
 }
 

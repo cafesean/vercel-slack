@@ -3,11 +3,11 @@
 import crypto from "crypto";
 // const crypto = require("crypto");
 
-export function validateSlackRequest (event, signingSecret) {
+export function validateSlackRequest (req, signingSecret) {
 
-    const requestBody = JSON.stringify(event["body"])
+    const requestBody = JSON.stringify(req["body"])
 
-    const headers = event.headers
+    const headers = req.headers
 
     const timestamp = headers["x-slack-request-timestamp"]
     const slackSignature = headers["x-slack-signature"]
