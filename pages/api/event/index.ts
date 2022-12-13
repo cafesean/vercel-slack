@@ -73,8 +73,8 @@ console.log("NOT A BOT");
 
     const engine = "text-davinci-003";
 
-    var temperature = new Number(process.env.TEMPERATURE);
-    var tokens = new Number(process.env.MAX_TOKENS);
+    var temperature = process.env.TEMPERATURE;
+    var tokens = process.env.MAX_TOKENS;
 
     const apiUrl = 'https://api.openai.com/v1/engines/' + engine + '/completions';
 
@@ -87,7 +87,7 @@ console.log("apiUrl: ", apiUrl);
     const options = {
         headers: {
         "Content-Type": `application/json`,
-        "Authorization": `Bearer ` + process.env.OPENAI_API_KEY,
+        "Authorization": "Bearer " + process.env.OPENAI_API_KEY,
         }
     };
 
