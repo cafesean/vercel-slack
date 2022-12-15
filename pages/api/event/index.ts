@@ -57,13 +57,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         });
         console.log("Single quotes (\') are not allowed.");
         // res.status(200).end();
-        return res.status(200).end();
+        return res.status(200).end;
     } 
 
     if (!validateSlackRequest(req, signingSecret)) {
         console.log("Request invalid");
         // res.status(500).end();
-        return res.status(200).end();
+        return res.status(200).end;
     }
     res.status(200).send("ok");
     // res.json({ok:true}); 
@@ -120,12 +120,12 @@ console.log("event.ts: ", event.ts);
         .catch((error) => {
             // console.log("error in catch: ", error);
             reject(error);
-            res.status(200).end("error");
+            res.status(200).end;
         });
     })
     .catch((error) => {
         console.log("error in catch: ", error);
-        res.status(200).end("error");
+        res.status(200).end;
     });
 }
 
