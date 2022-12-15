@@ -64,7 +64,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         // res.status(500).end();
         return res.status(200).end();
     }
-    res.status(200).send({ok: true});
+    res.status(200).send("ok");
     // res.json({ok:true}); 
     
 console.log("NOT A BOT");
@@ -96,9 +96,16 @@ console.log("event.ts: ", event.ts);
 
     var completion = "";
     
-    try {
+    const timer = new Promise((resolve, reject) => {
+        // Set up the timeout
+        const timer = setTimeout(() => {
+            reject("timed out");
+        }, 10000);
+
+
         // create promise chain for axios request
-        new Promise((resolve, reject) => {
+        const openai = new Promise((resolve, reject) => {
+            // Set up the timeout
             //
             axios
             .post(apiUrl, data, options)
@@ -109,7 +116,6 @@ console.log("event.ts: ", event.ts);
             })
             .catch(error => {
                 console.log("in catch error");
-                res.status(200).end("ok");
                 reject("failure");
             });
         })
@@ -123,21 +129,27 @@ console.log("event.ts: ", event.ts);
                     });
                     console.log("Slack message sent.")
                     resolve("success");
-                    res.status(200).end("ok")
+                    // res.status(200).end("ok")
                 } catch(e) {
                     console.log("catch=",e);
                     reject("failure");
-                    res.status(200).end("error");
+                    // res.status(200).end("error");
                 }
             });
+            resolve("success");
         })
         .catch((error) => {
+            reject("failure");
             console.log("error in catch: ", error);
-            res.status(200).end("error");
+            // res.status(200).end("error");
         });
-    } catch(e) {
-        console.log("catch=",e);
-        res.status(200).end("error");
-    }
+    });
+
+
+
+    // } catch(e) {
+    //     console.log("catch=",e);
+    //     res.status(200).end("error");
+    // }
 }
 
