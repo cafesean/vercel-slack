@@ -150,10 +150,10 @@ console.log("event.ts: ", event.ts);
     try {
         await timer;
         console.log("timer completed");
-        // res.status(200).end("ok");
+        res.status(200).end("ok");
     } catch(e) {
         console.log("catch=",e);
-        // res.status(200).end("error");
+        res.status(200).end("error");
     }
 
 
