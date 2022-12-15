@@ -1,7 +1,7 @@
 const axios = require('axios');
 import { token } from './_constants';
 
-export function tokenizeString(string) {
+export function tokenizeString(string:string) {
     const array = string.split(" ").filter(element => {
         return element !== ""
     })
@@ -9,7 +9,7 @@ export function tokenizeString(string) {
     return array
 }
 
-export async function acknowledge(req, res) {
+export async function acknowledge(req:any, res:any) {
 
     const message = {
         text: "...",
@@ -25,16 +25,16 @@ export async function acknowledge(req, res) {
         headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': `Bearer ${token}` },
         data: message,
     })
-        .then(response => {
+        .then((response:any) => {
             console.log("Acknowledge: ", response.data);
         })
-        .catch(err => {
+        .catch((err:any) => {
             console.log("axios Error:", err)
         })
 
 }
 
-export async function postToChannel(channelId, thread, res, payload) {
+export async function postToChannel(channelId:string, thread:string, res:any, payload:any) {
 
     console.log("channel:", channelId)
     // var channelId = await channelNameToId(channel)
@@ -53,11 +53,11 @@ export async function postToChannel(channelId, thread, res, payload) {
         headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': `Bearer ${token}` },
         data: message,
     })
-        .then(response => {
+        .then((response:any) => {
             // response.data;
             return response.data;
         })
-        .catch(err => {
+        .catch((err:any) => {
             console.log("axios Error:", err)
             return res.status(500).send({
                 "response_type": "ephemeral",

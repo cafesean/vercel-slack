@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-export default async function gpt3(prompt) {
+export default async function gpt3(prompt:string) {
 console.log("in gpt3");
         // var resultJSON = {};
         

@@ -47,6 +47,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     let channel = app.channel;
     let thread = <string>app.thread_ts;
     let prompt =  req.body.event.text;
+    let signingSecret = process.env.SLACK_SIGNING_SECRET;
 
     if (prompt.indexOf("’") != -1) {
             const result = await app.client.chat.postMessage({

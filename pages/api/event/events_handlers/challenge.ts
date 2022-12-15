@@ -1,4 +1,4 @@
-export async function sendChallenge(req, res) {
+export async function sendChallenge(req:any, res:any) {
 
     console.log("req body challenge is:", req.body.challenge)
 

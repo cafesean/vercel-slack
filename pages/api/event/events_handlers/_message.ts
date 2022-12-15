@@ -1,7 +1,7 @@
 import { postToChannel } from "../_utils"
 
 
-export async function message(req, res) {
+export async function message(req:any, res:any) {
     let event = req.body.event;
     let channel = event.channel;
     let thread = event.ts;

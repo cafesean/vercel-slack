@@ -3,7 +3,7 @@
 import crypto from "crypto";
 // const crypto = require("crypto");
 
-export function validateSlackRequest (req, signingSecret) {
+export function validateSlackRequest (req:any, signingSecret:any) {
 
     const requestBody = JSON.stringify(req["body"])
 
