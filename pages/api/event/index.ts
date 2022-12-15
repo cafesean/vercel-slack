@@ -97,69 +97,49 @@ console.log("event.ts: ", event.ts);
 
     var completion = "";
     
-    const timer = new Promise((resolve, reject) => {
+    new Promise(async (resolve, reject) => {
         // Set up the timeout
         const timer = setTimeout(() => {
             reject("timed out");
         }, 10000);
 
-
-        // create promise chain for axios request
-        const openai = new Promise((resolve, reject) => {
-            // Set up the timeout
-            //
-            axios
-            .post(apiUrl, data, options)
-            .then(response => {
-                completion = response.data.choices[0].text;
-                // console.log("data: ", response.data.choices[0].text);
+        //openai call
+        await httpRequest(apiUrl, data, options)
+        .then((completion) => { //completion is the response from openai
+                app.client.chat.postMessage({
+                    channel: event.channel,
+                    thread_ts: event.ts,
+                    text: completion
+                });
+                console.log("Slack message sent.")
+                
+                clearTimeout(timer);
                 resolve("success");
-            })
-            .catch(error => {
-                console.log("in catch error");
-                reject("failure");
-            });
-        })
-        .then((result) => {
-            result = new Promise((resolve, reject) => {
-                try{
-                    app.client.chat.postMessage({
-                        channel: event.channel,
-                        thread_ts: event.ts,
-                        text: completion
-                    });
-                    console.log("Slack message sent.")
-                    resolve("success");
-                    // res.status(200).end("ok")
-                } catch(e) {
-                    console.log("catch=",e);
-                    reject("failure");
-                    // res.status(200).end("error");
-                }
-            });
-            resolve("success");
+                // res.status(200).end("ok")
         })
         .catch((error) => {
-            reject("failure");
-            console.log("error in catch: ", error);
-            // res.status(200).end("error");
+            // console.log("error in catch: ", error);
+            reject(error);
+            res.status(200).end("error");
         });
-    });
-
-    //require promise chain to complete
-    try {
-        await timer;
-        console.log("timer completed");
-        res.status(200).end("ok");
-    } catch(e) {
-        console.log("catch=",e);
+    })
+    .catch((error) => {
+        console.log("error in catch: ", error);
         res.status(200).end("error");
-    }
-
-
-    // } catch(e) {
-    //     console.log("catch=",e);
-    //     res.status(200).end("error");
-    // }
+    });
 }
 
+
+export async function httpRequest(url:string, data:any, options:any) {
+    return new Promise(async (resolve, reject) => {
+        await axios
+            .post(url, data, options)
+            .then(response => {
+                resolve(response.data.choices[0].text);
+                console.log("data: ", response.data.choices[0].text);
+            })
+            .catch(error => {
+                reject(error);
+            });
+    });
+}
