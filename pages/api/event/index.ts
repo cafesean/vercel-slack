@@ -145,6 +145,15 @@ console.log("event.ts: ", event.ts);
         });
     });
 
+    //require promise chain to complete
+    try {
+        await timer;
+        console.log("timer completed");
+        // res.status(200).end("ok");
+    } catch(e) {
+        console.log("catch=",e);
+        // res.status(200).end("error");
+    }
 
 
     // } catch(e) {
