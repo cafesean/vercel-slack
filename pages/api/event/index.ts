@@ -30,9 +30,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         method,
     } = req;
     
-    let channel = app.channel;
-    let thread = app.thread_ts;
-    let prompt =  req.body.event.text;
 
 // console.log("app.bot_id=null:", app.bot_id==null);
 // console.log("app.event_type:", app.event_type);
@@ -46,6 +43,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         // res.status(200).end();
         return;
     }
+
+    let channel = app.channel;
+    let thread = <string>app.thread_ts;
+    let prompt =  req.body.event.text;
 
     if (prompt.indexOf("’") != -1) {
             const result = await app.client.chat.postMessage({
@@ -77,8 +78,10 @@ console.log("NOT A BOT");
     var tokens = new Number(process.env.MAX_TOKENS);
 
     const apiUrl = 'https://api.openai.com/v1/engines/' + engine + '/completions';
-
+console.log("prompt: ", prompt);
 console.log("apiUrl: ", apiUrl);
+console.log("event.channel: ", event.channel);
+console.log("event.ts: ", event.ts);
     const data = {
         prompt: prompt,
         max_tokens: tokens,
@@ -92,44 +95,49 @@ console.log("apiUrl: ", apiUrl);
     };
 
     var completion = "";
-
-console.log("before axios");
+    
     try {
-console.log("in try");
-console.log("apiUrl:", apiUrl);
-console.log("data:", data);
-console.log("options:", options);
-        await axios
+        // create promise chain for axios request
+        new Promise((resolve, reject) => {
+            //
+            axios
             .post(apiUrl, data, options)
             .then(response => {
-            // resultJSON["completion"] = response.data.choices[0].text 
-
                 completion = response.data.choices[0].text;
-console.log("completion:", completion);
-console.log("event.channel:", event.channel);
-console.log("event.ts:", event.ts);
-
-                console.log("data: ", response.data);
+                // console.log("data: ", response.data.choices[0].text);
+                resolve("success");
             })
             .catch(error => {
                 console.log("in catch error");
-                res.status(200).end({ok: false});
+                res.status(200).end("ok");
+                reject("failure");
+            });
+        })
+        .then((result) => {
+            result = new Promise((resolve, reject) => {
+                try{
+                    app.client.chat.postMessage({
+                        channel: event.channel,
+                        thread_ts: event.ts,
+                        text: completion
+                    });
+                    console.log("Slack message sent.")
+                    resolve("success");
+                    res.status(200).end("ok")
+                } catch(e) {
+                    console.log("catch=",e);
+                    reject("failure");
+                    res.status(200).end("error");
+                }
+            });
+        })
+        .catch((error) => {
+            console.log("error in catch: ", error);
+            res.status(200).end("error");
         });
-
-        const result = await app.client.chat.postMessage({
-            channel: event.channel,
-            thread_ts: event.ts,
-            text: completion
-        });
-        console.log("done posting to channel");
-        // console.log("result:", result);
-        res.status(200).end({ok: true});
-        // postToChannel(channel, thread, res, completion);
-        // res.status(200).send("ok");
     } catch(e) {
         console.log("catch=",e);
-    }  
-    console.log("Completion: ", completion);
-    res.status(200).end({ok: true});
+        res.status(200).end("error");
+    }
 }
 
